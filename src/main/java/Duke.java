@@ -29,8 +29,17 @@ public class Duke {
             case COMMAND_DONE:
                 markAsDone(line);
                 break;
-            case COMMAND_ADD:
-                addTask(line);
+            case COMMAND_TODO:
+                addTodo(line);
+                break;
+            case COMMAND_DEADLINE:
+                addDeadline(line);
+                break;
+            case COMMAND_EVENT:
+                addEvent(line);
+                break;
+            case COMMAND_UNKNOWN:
+                System.out.println("Unknown command. Type \"help\" for more information");
                 break;
             }
 
@@ -40,17 +49,45 @@ public class Duke {
         }
     }
 
-    private static void addTask(String line) {
-        tasks[taskCount] = new Task(line);
-        System.out.println("added: " + line);
+    private static void addTodo(String line) {
+        int i = line.indexOf(' ');
+        String taskDescription = (i == -1) ? line : line.substring(i+1);
+        tasks[taskCount] = new Todo(taskDescription);
+        printAddNotification();
+    }
+
+    private static void addDeadline(String line) {
+        int i1 = line.indexOf(' ');
+        int i2 = line.indexOf("/by");
+        String taskDescription = line.substring(i1+1, i2 - 1);
+        String taskDeadline = line.substring(i2+4);
+        tasks[taskCount] = new Deadline(taskDescription, taskDeadline);
+        printAddNotification();
+    }
+
+    private static void addEvent(String line) {
+        int i1 = line.indexOf(' ');
+        int i2 = line.indexOf("/at");
+        String taskDescription = line.substring(i1+1, i2 - 1);
+        String taskTime = line.substring(i2+4);
+        tasks[taskCount] = new Event(taskDescription, taskTime);
+        printAddNotification();
+    }
+
+    private static void printAddNotification() {
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + tasks[taskCount]);
         taskCount++;
+        String out = (taskCount > 1) ? ("Now you have " + taskCount + " tasks in the list.") :
+                "Now you have 1 task in the list.";
+        System.out.println(out);
     }
 
     private static void markAsDone(String line) {
         int index = Integer.parseInt(line.substring(5, 6));
         tasks[index - 1].setStatusDone();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(("  [" + tasks[index - 1].getStatusIcon() + "] " + tasks[index - 1].getDescription()));
+        System.out.println("  " + tasks[index - 1]);
     }
 
     private static void printTasks() {
@@ -59,7 +96,8 @@ public class Duke {
             if (tasks[i] == null) {
                 break;
             }
-            System.out.println((i + 1) + ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription());
+            System.out.print((i + 1) + ".");
+            System.out.println(tasks[i]);
             i++;
         }
     }
@@ -73,16 +111,25 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
-    private static CommandType readCommandType(String command) {
+    private static CommandType readCommandType(String input) {
+        int i = input.indexOf(' ');
+        String command = (i == -1) ? input : input.substring(0, i);
+
         switch (command) {
         case ("bye"):
             return CommandType.COMMAND_BYE;
         case ("list"):
             return CommandType.COMMAND_LIST;
+        case("todo"):
+            return CommandType.COMMAND_TODO;
+        case("deadline"):
+            return CommandType.COMMAND_DEADLINE;
+        case("event"):
+            return CommandType.COMMAND_EVENT;
+        case("done"):
+            return CommandType.COMMAND_DONE;
         default:
-            if (command.length() >= 4 && command.substring(0, 4).equals("done"))
-                return CommandType.COMMAND_DONE;
-            return CommandType.COMMAND_ADD;
+            return CommandType.COMMAND_UNKNOWN;
         }
     }
 }
