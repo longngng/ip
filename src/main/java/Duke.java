@@ -18,7 +18,12 @@ public class Duke {
 
         while (true) {
             line = in.nextLine();
-            CommandType commandType = readCommandType(line);
+            CommandType commandType = CommandType.COMMAND_UNKNOWN;
+            try {
+                commandType = readCommandType(line);
+            } catch (DukeException e) {
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
 
             switch(commandType) {
             case COMMAND_BYE:
@@ -30,7 +35,11 @@ public class Duke {
                 markAsDone(line);
                 break;
             case COMMAND_TODO:
-                addTodo(line);
+                try {
+                    addTodo(line);
+                } catch (DukeException e) {
+                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                }
                 break;
             case COMMAND_DEADLINE:
                 addDeadline(line);
@@ -49,9 +58,13 @@ public class Duke {
         }
     }
 
-    private static void addTodo(String line) {
+    private static void addTodo(String line) throws DukeException{
+
         int i = line.indexOf(' ');
         String taskDescription = (i == -1) ? line : line.substring(i+1);
+        if (i == -1) {
+            throw new DukeException();
+        }
         tasks[taskCount] = new Todo(taskDescription);
         printAddNotification();
     }
@@ -111,7 +124,7 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
-    private static CommandType readCommandType(String input) {
+    private static CommandType readCommandType(String input) throws DukeException{
         int i = input.indexOf(' ');
         String command = (i == -1) ? input : input.substring(0, i);
 
@@ -129,7 +142,8 @@ public class Duke {
         case("done"):
             return CommandType.COMMAND_DONE;
         default:
-            return CommandType.COMMAND_UNKNOWN;
+            throw new DukeException();
+            //return CommandType.COMMAND_UNKNOWN;
         }
     }
 }
