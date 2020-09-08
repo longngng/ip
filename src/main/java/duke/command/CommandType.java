@@ -1,3 +1,4 @@
+package duke.command;
 public enum CommandType {
     COMMAND_BYE,
     COMMAND_LIST,

@@ -1,4 +1,11 @@
-import java.util.Arrays;
+package duke;
+
+import duke.command.CommandType;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.Scanner;
 
 public class Duke {

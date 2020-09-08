@@ -1,4 +1,8 @@
-public class Event extends Task{
+package duke.task;
+
+import duke.task.Task;
+
+public class Event extends Task {
 
     protected String time;
 
