@@ -1,11 +1,8 @@
 import java.util.Arrays;
 import java.util.Scanner;
-
+import java.util.ArrayList;
 public class Duke {
-    public static int MAX_TASK = 100;
-    static Task[] tasks = new Task[MAX_TASK];
-    public static int taskCount = 0;
-
+    private static ArrayList<Task> tasks = new ArrayList<>();
     public static void main(String[] args) {
         printHello();
         handleCommand();
@@ -47,6 +44,9 @@ public class Duke {
             case COMMAND_EVENT:
                 addEvent(line);
                 break;
+            case COMMAND_DELETE:
+                deleteEvent(line);
+                break;
             case COMMAND_UNKNOWN:
                 System.out.println("Unknown command. Type \"help\" for more information");
                 break;
@@ -58,6 +58,18 @@ public class Duke {
         }
     }
 
+    private static void deleteEvent(String line) {
+        int index = Integer.parseInt(line.substring(7, 8));
+        System.out.println("Index of delete task" + index);
+        Task tempTask = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        System.out.println("Noted! I've removed this task:");
+        System.out.println("  " + tempTask);
+        String out = (tasks.size() > 1) ? ("Now you have " + tasks.size() + " tasks in the list.") :
+                "Now you have 1 task in the list.";
+        System.out.println(out);
+    }
+
     private static void addTodo(String line) throws DukeException{
 
         int i = line.indexOf(' ');
@@ -65,7 +77,7 @@ public class Duke {
         if (i == -1) {
             throw new DukeException();
         }
-        tasks[taskCount] = new Todo(taskDescription);
+        tasks.add(new Todo(taskDescription));
         printAddNotification();
     }
 
@@ -74,7 +86,7 @@ public class Duke {
         int i2 = line.indexOf("/by");
         String taskDescription = line.substring(i1+1, i2 - 1);
         String taskDeadline = line.substring(i2+4);
-        tasks[taskCount] = new Deadline(taskDescription, taskDeadline);
+        tasks.add(new Deadline(taskDescription, taskDeadline));
         printAddNotification();
     }
 
@@ -83,35 +95,30 @@ public class Duke {
         int i2 = line.indexOf("/at");
         String taskDescription = line.substring(i1+1, i2 - 1);
         String taskTime = line.substring(i2+4);
-        tasks[taskCount] = new Event(taskDescription, taskTime);
+        tasks.add(new Event(taskDescription, taskTime));
         printAddNotification();
     }
 
     private static void printAddNotification() {
         System.out.println("Got it. I've added this task:");
-        System.out.println("  " + tasks[taskCount]);
-        taskCount++;
-        String out = (taskCount > 1) ? ("Now you have " + taskCount + " tasks in the list.") :
+        System.out.println("  " + tasks.get(tasks.size()-1));
+        String out = (tasks.size() > 1) ? ("Now you have " + tasks.size() + " tasks in the list.") :
                 "Now you have 1 task in the list.";
         System.out.println(out);
     }
 
     private static void markAsDone(String line) {
         int index = Integer.parseInt(line.substring(5, 6));
-        tasks[index - 1].setStatusDone();
+        tasks.get(index-1).setStatusDone();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + tasks[index - 1]);
+        System.out.println("  " + tasks.get(index-1));
     }
 
     private static void printTasks() {
-        int i = 0;
-        while (i < tasks.length) {
-            if (tasks[i] == null) {
-                break;
-            }
-            System.out.print((i + 1) + ".");
-            System.out.println(tasks[i]);
-            i++;
+        int index = 1;
+        for (Task task : tasks) {
+            System.out.print((index++) + ".");
+            System.out.println(task);
         }
     }
 
@@ -141,6 +148,8 @@ public class Duke {
             return CommandType.COMMAND_EVENT;
         case("done"):
             return CommandType.COMMAND_DONE;
+        case("delete"):
+            return CommandType.COMMAND_DELETE;
         default:
             throw new DukeException();
             //return CommandType.COMMAND_UNKNOWN;
