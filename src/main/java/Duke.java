@@ -1,5 +1,10 @@
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class Duke {
     public static int MAX_TASK = 100;
@@ -7,9 +12,104 @@ public class Duke {
     public static int taskCount = 0;
 
     public static void main(String[] args) {
+        loadExistingList();
         printHello();
         handleCommand();
         printGoodbye();
+        updateDataFile();
+    }
+
+    private static void loadExistingList() {
+        //If the folder doesn't exists, create it
+        File folder = new File("data");
+        boolean bool = folder.mkdirs();
+        if(bool){
+            System.out.println("Directory created successfully");
+        }else{
+            System.out.println("Sorry couldn't create specified directory");
+        }
+
+        //If the file doesn't exist, create it
+        File f = new File("data/duke.txt");
+        Scanner s = null; // create a Scanner using the File as the source
+        try {
+            s = new Scanner(f);
+            parseTasks(s);
+        } catch (FileNotFoundException e) {
+            //System.out.println("File Not Found");
+            //e.printStackTrace();
+            try {
+                f.createNewFile();
+                //System.out.println("New File");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+    }
+
+    private static void parseTasks(Scanner s) {
+        while (s.hasNext()) {
+            String currentLine = s.nextLine();
+            String[] data = currentLine.split("\\|");
+
+            for (int i = 0; i < data.length; i++) {
+                data[i] = data[i].trim();
+            }
+
+            if (data[0].equals("T")) {
+                tasks[taskCount] = new Todo(data[2]);
+                if (data[1].equals("1")) {
+                    tasks[taskCount].setStatusDone();
+                }
+            } else if (data[0].equals("D")) {
+                tasks[taskCount] = new Deadline(data[2], data[3]);
+                if (data[1].equals("1")) {
+                    tasks[taskCount].setStatusDone();
+                }
+            } else if (data[0].equals("E")) {
+                tasks[taskCount] = new Event(data[2],data[3]);
+                if (data[1].equals("1")) {
+                    tasks[taskCount].setStatusDone();
+                }
+            } else {
+                System.out.println("Error");
+            }
+            taskCount++;
+        }
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+    private static void updateDataFile() {
+        String file2 = "data/duke.txt";
+        String stringOfTasks = "";
+        for (int i = 0; i < taskCount; i++) {
+            Task task = tasks[i];
+            if (task instanceof Event) {
+                Event temp = (Event) task;
+                int done = temp.getDoneStatus();
+                stringOfTasks += "E" + " | " + done + " | " + temp.getDescription() + " | " + temp.getTime() + System.lineSeparator();
+            } else if (task instanceof Deadline) {
+                Deadline temp = (Deadline) task;
+                int done = temp.getDoneStatus();
+                stringOfTasks += "D" + " | " + done + " | " + temp.getDescription() + " | " + temp.getBy() + System.lineSeparator();
+            } else if (task instanceof Todo) {
+                Todo temp = (Todo) task;
+                int done = temp.getDoneStatus();
+                stringOfTasks += "T" + " | " + done + " | " + temp.getDescription() + System.lineSeparator();
+            } else {
+                System.out.println("Error");
+            }
+        }
+        try {
+            writeToFile(file2, stringOfTasks);
+            //writeToFile(file2, "first line" + System.lineSeparator() + "second line");
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
     }
 
     private static void handleCommand() {
@@ -67,7 +167,10 @@ public class Duke {
         }
         tasks[taskCount] = new Todo(taskDescription);
         printAddNotification();
+        updateDataFile();
     }
+
+
 
     private static void addDeadline(String line) {
         int i1 = line.indexOf(' ');
@@ -76,6 +179,7 @@ public class Duke {
         String taskDeadline = line.substring(i2+4);
         tasks[taskCount] = new Deadline(taskDescription, taskDeadline);
         printAddNotification();
+        updateDataFile();
     }
 
     private static void addEvent(String line) {
@@ -85,6 +189,7 @@ public class Duke {
         String taskTime = line.substring(i2+4);
         tasks[taskCount] = new Event(taskDescription, taskTime);
         printAddNotification();
+        updateDataFile();
     }
 
     private static void printAddNotification() {
@@ -101,6 +206,7 @@ public class Duke {
         tasks[index - 1].setStatusDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + tasks[index - 1]);
+        updateDataFile();
     }
 
     private static void printTasks() {

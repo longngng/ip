@@ -26,6 +26,9 @@ public class Task {
     public void setStatusDone() {
         isDone = true;
     }
+    public int getDoneStatus () {
+        return isDone? 1 : 0;
+    }
     @Override
     public String toString() {
         return ("[" + this.getStatusIcon() + "] " + this.description );
