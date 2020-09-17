@@ -158,7 +158,7 @@ public class Duke {
 
     private static void deleteEvent(String line) {
         int index = Integer.parseInt(line.substring(7, 8));
-        System.out.println("Index of delete task" + index);
+        //System.out.println("Index of delete task" + index);
         Task tempTask = tasks.get(index - 1);
         tasks.remove(index - 1);
         System.out.println("Noted! I've removed this task:");
@@ -166,6 +166,7 @@ public class Duke {
         String out = (tasks.size() > 1) ? ("Now you have " + tasks.size() + " tasks in the list.") :
                 "Now you have 1 task in the list.";
         System.out.println(out);
+        updateDataFile();
     }
 
     private static void addTodo(String line) throws DukeException{
