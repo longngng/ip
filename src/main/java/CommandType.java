@@ -6,5 +6,6 @@ public enum CommandType {
     COMMAND_DEADLINE,
     COMMAND_EVENT,
     COMMAND_DELETE,
+    COMMAND_FIND,
     COMMAND_UNKNOWN
 }
