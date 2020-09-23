@@ -43,6 +43,9 @@ public class Parser {
             case COMMAND_DELETE:
                 TaskList.deleteEvent(line);
                 break;
+            case COMMAND_FIND:
+                TaskList.findTasks(line);
+                break;
             case COMMAND_UNKNOWN:
                 System.out.println("Unknown command. Type \"help\" for more information");
                 break;
@@ -80,6 +83,8 @@ public class Parser {
             return CommandType.COMMAND_DONE;
         case("delete"):
             return CommandType.COMMAND_DELETE;
+        case("find"):
+            return CommandType.COMMAND_FIND;
         default:
             throw new DukeException();
             //return CommandType.COMMAND_UNKNOWN;
