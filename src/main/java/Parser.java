@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class Parser {
+
+    /**
+     * Read in commands from users and process them until the "bye" command is input
+     */
     protected static void handleCommand() {
         String line;
         Scanner in = new Scanner(System.in);
@@ -50,6 +54,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the of type of the input command.
+     *
+     * @param input  X coordinate of position.
+     * @return one type of the command.
+     * @throws DukeException If the input command is not in the list of known commands.
+     */
     private static CommandType readCommandType(String input) throws DukeException{
         int i = input.indexOf(' ');
         String command = (i == -1) ? input : input.substring(0, i);
