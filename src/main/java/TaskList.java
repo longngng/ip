@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private static ArrayList<Task> tasks;
@@ -77,5 +78,30 @@ public class TaskList {
             System.out.print((index++) + ".");
             System.out.println(task);
         }
+    }
+
+    public static void findTasks(String line) {
+        int i1 = line.indexOf(' ');
+        String keyword = line.substring(i1);
+
+        ArrayList<Task> foundTasks;
+        foundTasks = (ArrayList<Task>) tasks.stream()
+                .filter((s) -> s.getDescription()
+                .contains(keyword))
+                .collect(Collectors.toList());
+
+        if (foundTasks.size() > 0) {
+            System.out.println("Here are the matching tasks in your list:");
+            int index = 1;
+            for (Task task : foundTasks) {
+                System.out.print((index++) + ".");
+                System.out.println(task);
+            }
+        } else if (foundTasks.size() == 0){
+            System.out.println("No match found");
+        } else {
+            System.out.println("Find error");
+        }
+
     }
 }
