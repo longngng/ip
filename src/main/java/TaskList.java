@@ -11,6 +11,9 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Deletes a task in the list and update the output file
+     */
     public static void deleteEvent(String line) {
         int index = Integer.parseInt(line.substring(7, 8));
         //System.out.println("Index of delete task" + index);
@@ -24,6 +27,11 @@ public class TaskList {
         Storage.updateDataFile();
     }
 
+    /**
+     * Adds a to-do to the list of the tasks and update the output file
+     *
+     * @throws DukeException If there is no description for the list
+     */
     public static void addTodo(String line) throws DukeException{
 
         int i = line.indexOf(' ');
@@ -36,6 +44,9 @@ public class TaskList {
         Storage.updateDataFile();
     }
 
+    /**
+     * Adds a deadline to the list of the tasks and update the output file
+     */
     public static void addDeadline(String line) {
         int i1 = line.indexOf(' ');
         int i2 = line.indexOf("/by");
@@ -46,6 +57,9 @@ public class TaskList {
         Storage.updateDataFile();
     }
 
+    /**
+     * Adds an event to the list of the tasks and update the output file
+     */
     public static void addEvent(String line) {
         int i1 = line.indexOf(' ');
         int i2 = line.indexOf("/at");
@@ -56,6 +70,9 @@ public class TaskList {
         Storage.updateDataFile();
     }
 
+    /**
+     * Prints the notification and the task added
+     */
     public static void printAddNotification() {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + tasks.get(tasks.size()-1));
@@ -64,6 +81,9 @@ public class TaskList {
         System.out.println(out);
     }
 
+    /**
+     * Marks a task as done and update the output file
+     */
     public static void markAsDone(String line) {
         int index = Integer.parseInt(line.substring(5, 6));
         tasks.get(index-1).setStatusDone();
@@ -71,7 +91,9 @@ public class TaskList {
         System.out.println("  " + tasks.get(index-1));
         Storage.updateDataFile();
     }
-
+    /**
+     * Prints the list of the tasks with numbering
+     */
     public static void printTasks() {
         int index = 1;
         for (Task task : tasks) {

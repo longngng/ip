@@ -11,16 +11,15 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-    //static Scanner s = null;
+
+    /**
+     * Loads the existing list of tasks from file.
+     * If the folder or file do not exist, create it
+     */
     public void loadExistingList() {
         //If the folder doesn't exists, create it
         File folder = new File("data");
         boolean bool = folder.mkdirs();
-        if(bool){
-            System.out.println("Directory created successfully");
-        }else{
-            System.out.println("Sorry couldn't create specified directory");
-        }
 
         //If the file doesn't exist, create it
         File f = new File(filePath);
@@ -40,6 +39,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the existing tasks listed in the file into the ArrayList
+     */
     private static void parseTasks(Scanner s) {
         while (s.hasNext()) {
             String currentLine = s.nextLine();
@@ -70,13 +72,19 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes text into output file
+     */
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
-    static void updateDataFile() {
+    /**
+     * Update the output file when a new task is added, deleted or marked as done
+     */
+    public static void updateDataFile() {
         String file2 = filePath;
         String stringOfTasks = "";
         for (Task task : tasks) {
@@ -104,6 +112,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Return the the list of the task in the file and call the loadExistingList() function.
+     *
+     * @return the list of the task at the beginning when the program is started.
+     */
     public ArrayList<Task> load() {
         loadExistingList();
         return tasks;
