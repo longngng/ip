@@ -129,6 +129,7 @@ Deletes a task from the list and updates the record.
 Format: `delete <INDEX>`
 * The index of the task can be read from using `list` command.
 * The index must be a **positive integer** 1, 2, 3, ...
+
 >Example
 ```
 >>>delete 2
