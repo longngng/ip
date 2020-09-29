@@ -59,7 +59,8 @@ Adds an event with happening time to the list of tasks and updates the records.
 The new task added is assumed to be not done.
 
 Format: `event <EVENT_DESCRIPTION> /at <EVENT_DATE>`
-* The <EVENT_DATE> must be in the format yyyy-mm-dd
+* The <EVENT_DATE> must be in the format yyyy-mm-dd.
+* If the <EVENT_DATE> does not follow the standard format above, the event will still be added, but the program will notify the user that the date is not in the standard form.
 
 >Example
 ```
@@ -75,6 +76,8 @@ The new task added is assumed to be not done.
 
 Format: `deadline <DEADLINE_DESCRIPTION> /by <DEADLINE_DATE>`
 * The <DEADLINE_DATE> must be in the format yyyy-mm-dd.
+* If the <DEADLINE_DATE> does not follow the standard format above, the deadline  will still be added, but the program will notify the user that the date is not in the standard form.
+
 
 >Example
 ```
