@@ -60,6 +60,7 @@ The new task added is assumed to be not done.
 
 Format: `event <EVENT_DESCRIPTION> /at <EVENT_DATE>`
 * The <EVENT_DATE> must be in the format yyyy-mm-dd
+
 >Example
 ```
 >>>event oral presentation 1 /at 2020-09-01
@@ -74,6 +75,7 @@ The new task added is assumed to be not done.
 
 Format: `deadline <DEADLINE_DESCRIPTION> /by <DEADLINE_DATE>`
 * The <DEADLINE_DATE> must be in the format yyyy-mm-dd.
+
 >Example
 ```
 >>>deadline return book /by 2020-09-12
