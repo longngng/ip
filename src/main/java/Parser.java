@@ -25,7 +25,15 @@ public class Parser {
                 TaskList.printTasks();
                 break;
             case COMMAND_DONE:
-                TaskList.markAsDone(line);
+                try {
+                    TaskList.markAsDone(line);
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("Cannot find the index of the task to be deleted");
+                } catch (NumberFormatException e) {
+                    System.out.println("Please key in a positive number for the index");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("The index is out of bound. Use `list` to check the index of the tasks");
+                }
                 break;
             case COMMAND_TODO:
                 try {
@@ -54,7 +62,15 @@ public class Parser {
                 }
                 break;
             case COMMAND_DELETE:
-                TaskList.deleteEvent(line);
+                try {
+                    TaskList.deleteEvent(line);
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("Cannot find the index of the task to be deleted");
+                } catch (NumberFormatException e) {
+                    System.out.println("Please key in a positive number for the index");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("The index is out of bound. Use `list` to check the index of the tasks");
+                }
                 break;
             case COMMAND_FIND:
                 TaskList.findTasks(line);
