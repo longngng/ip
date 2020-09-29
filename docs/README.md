@@ -1,11 +1,11 @@
-# duke.Duke project 
+# Duke project 
 
 
 ## Table of Contents
 
 [1. Introduction](#1-introduction) <br>
 [2. Quick start](#2-quick-start) <br>
-[3. Features](#3-feature) <br>
+[3. Features](#3-features) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;[3.1 Viewing help](#31-viewing-help-help) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;[3.2 Adding a todo](#32-adding-a-todo-todo) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;[3.3 Adding an event](#33-adding-an-event-event) <br>
@@ -30,7 +30,7 @@ Prerequisites: JRE 11
    What can I do for you?
 ```
 
-## 3. Feature
+## 3. Features
 **Notes about the command format**
 
 Words in <UPPER_CASE> are the parameters to be supplied by the user
