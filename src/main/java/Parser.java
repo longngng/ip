@@ -57,6 +57,20 @@ public class Parser {
         }
     }
 
+    private static void printCommandList() {
+        System.out.println(
+                "Below is the list of available commands:\n" +
+                "todo\n" + "   `todo <DESCRIPTION>` adds a new todo task\n" +
+                "event\n" + "   `event <DESCRIPTION> /at <DATE>` adds a new event task\n" +
+                "deadline\n" + "    `deadline <DESCRIPTION> /by <DATE>` adds a new deadline task\n" +
+                "list\n" + "    `list` lists out the existing tasks\n" +
+                "done\n" + "    `done <INDEX>` marks a task as done\n" +
+                "find\n" + "    `find <KEYWORD>` lists out the tasks that contain a keyword\n" +
+                "delete\n" + "    `delete <INDEX>` deletes a task in the list\n" +
+                "bye\n" + "    `bye` terminates the program\n" +
+                "help\n" + "    `help` prints out the list of available commands and their descriptions");
+    }
+
     /**
      * Returns the of type of the input command.
      *
@@ -85,9 +99,10 @@ public class Parser {
             return CommandType.COMMAND_DELETE;
         case("find"):
             return CommandType.COMMAND_FIND;
+        case("help"):
+            return CommandType.COMMAND_HELP;
         default:
             throw new DukeException();
-            //return CommandType.COMMAND_UNKNOWN;
         }
     }
 }

@@ -8,4 +8,5 @@ public enum CommandType {
     COMMAND_DELETE,
     COMMAND_FIND,
     COMMAND_UNKNOWN
+    COMMAND_HELP,
 }
