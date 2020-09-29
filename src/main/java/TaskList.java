@@ -22,7 +22,7 @@ public class TaskList {
         System.out.println("Noted! I've removed this task:");
         System.out.println("  " + tempTask);
         String out = (tasks.size() > 1) ? ("Now you have " + tasks.size() + " tasks in the list.") :
-                "Now you have 1 task in the list.";
+                ("Now you have " + tasks.size() + " task in the list.");
         System.out.println(out);
         Storage.updateDataFile();
     }
@@ -77,7 +77,7 @@ public class TaskList {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + tasks.get(tasks.size()-1));
         String out = (tasks.size() > 1) ? ("Now you have " + tasks.size() + " tasks in the list.") :
-                "Now you have 1 task in the list.";
+                ("Now you have " + tasks.size() + " task in the list.");
         System.out.println(out);
     }
 
@@ -95,6 +95,9 @@ public class TaskList {
      * Prints the list of the tasks with numbering
      */
     public static void printTasks() {
+        if (tasks.size() == 0) {
+            System.out.println("The list of tasks is empty");
+        }
         int index = 1;
         for (Task task : tasks) {
             System.out.print((index++) + ".");

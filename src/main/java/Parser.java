@@ -46,6 +46,11 @@ public class Parser {
             case COMMAND_FIND:
                 TaskList.findTasks(line);
                 break;
+            case COMMAND_HELP:
+                printCommandList();
+                break;
+            case COMMAND_EMPTY:
+                break;
             case COMMAND_UNKNOWN:
                 System.out.println("Unknown command. Type \"help\" for more information");
                 break;
@@ -83,6 +88,8 @@ public class Parser {
         String command = (i == -1) ? input : input.substring(0, i);
 
         switch (command) {
+        case(""):
+            return CommandType.COMMAND_EMPTY;
         case ("bye"):
             return CommandType.COMMAND_BYE;
         case ("list"):
