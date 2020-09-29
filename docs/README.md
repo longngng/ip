@@ -136,6 +136,7 @@ Terminates the program and saves the recorded information to *~/data/duke.txt*
 
 Format: `bye`
 ## 4. Command summary
+
 Command |Syntax| Command description and example 
 ------------| ------ | ------------- 
 help |`help`|prints out the list of available commands and their descriptions
