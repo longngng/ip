@@ -67,6 +67,7 @@ Got it. I've added this task:
   [E][✘] oral presentation 1 (at: Sep 1 2020)
 Now you have 2 tasks in the list.
 ```
+
 ### 3.4. Adding a deadline `deadline`
 Adds a task with deadline to the list of tasks and updates the records. 
 The new task added is assumed to be not done.
@@ -80,6 +81,7 @@ Got it. I've added this task:
   [D][✘] return book (by: Sep 12 2020)
 Now you have 3 tasks in the list.
 ```
+
 ### 3.5. Listing all the tasks `list`
 Lists out all the existing tasks.
 
@@ -106,6 +108,7 @@ Format: `done <INDEX>`
 Nice! I've marked this task as done:
   [T][✓] read book
 ```
+
 ### 3.7. Finding a task `find`
 Lists out all the tasks that contain a keyword
 
@@ -131,10 +134,12 @@ Noted! I've removed this task:
   [E][✘] oral presentation 1 (at: Sep 1 2020)
 Now you have 2 tasks in the list.
 ```
+
 ### 3.9. Existing the program: `bye`
 Terminates the program and saves the recorded information to *~/data/duke.txt*
 
 Format: `bye`
+
 ## 4. Command summary
 
 Command |Syntax| Command description and example 
