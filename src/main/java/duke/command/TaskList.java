@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.Duke;
 import duke.DukeException;
+import duke.DukeException2;
 import duke.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -24,7 +26,7 @@ public class TaskList {
      * Deletes a task in the list and update the output file
      */
     public static void deleteEvent(String line) {
-        int index = Integer.parseInt(line.substring(7, 8));
+        int index = Integer.parseInt(line.substring(7));
         //System.out.println("Index of delete task" + index);
         Task tempTask = tasks.get(index - 1);
         tasks.remove(index - 1);
@@ -55,8 +57,11 @@ public class TaskList {
 
     /**
      * Adds a deadline to the list of the tasks and update the output file
+     *
+     * @throws DukeException if there is no description after 'deadline'
+     * @throws DukeException2 if the date is missing
      */
-    public static void addDeadline(String line) throws DukeException {
+    public static void addDeadline(String line) throws DukeException, DukeException2 {
         int i1 = line.indexOf(' ');
         if (i1 == -1) {
             throw new DukeException();
@@ -65,7 +70,12 @@ public class TaskList {
         int i2 = line.indexOf("/by");
 
         String taskDescription = line.substring(i1+1, i2 - 1);
-        String taskDeadline = line.substring(i2+4);
+        String taskDeadline = line.substring(i2+4).trim();
+        if (taskDeadline.length() == 0) {
+            throw new DukeException2();
+        }
+        System.out.println("taskDeadline:" + taskDeadline);
+        System.out.println("length" + taskDeadline.length());
         tasks.add(new Deadline(taskDescription, taskDeadline));
         printAddNotification();
         Storage.updateDataFile();
@@ -73,8 +83,11 @@ public class TaskList {
 
     /**
      * Adds an event to the list of the tasks and update the output file
+     *
+     * @throws DukeException if there is no description after 'event'
+     * @throws DukeException2 if the date is missing
      */
-    public static void addEvent(String line) throws DukeException {
+    public static void addEvent(String line) throws DukeException, DukeException2 {
         int i1 = line.indexOf(' ');
         if (i1 == -1) {
             throw new DukeException();
@@ -82,7 +95,10 @@ public class TaskList {
 
         int i2 = line.indexOf("/at");
         String taskDescription = line.substring(i1+1, i2 - 1);
-        String taskTime = line.substring(i2+4);
+        String taskTime = line.substring(i2+4).trim();
+        if (taskTime.length() == 0) {
+            throw new DukeException2();
+        }
         tasks.add(new Event(taskDescription, taskTime));
         printAddNotification();
         Storage.updateDataFile();
@@ -103,12 +119,13 @@ public class TaskList {
      * Marks a task as done and update the output file
      */
     public static void markAsDone(String line) {
-        int index = Integer.parseInt(line.substring(5, 6));
+        int index = Integer.parseInt(line.substring(5));
         tasks.get(index-1).setStatusDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + tasks.get(index-1));
         Storage.updateDataFile();
     }
+
     /**
      * Prints the list of the tasks with numbering
      */
@@ -123,9 +140,17 @@ public class TaskList {
         }
     }
 
-    public static void findTasks(String line) {
+    /**
+     * Lists out all the tasks that contain a keyword
+     *
+     * @throws DukeException if the keyword is missing
+     */
+    public static void findTasks(String line) throws DukeException {
         int i1 = line.indexOf(' ');
-        String keyword = line.substring(i1);
+        String keyword = (line.substring(i1)).trim();
+        if (keyword.length() == 0) {
+            throw new DukeException();
+        }
 
         ArrayList<Task> foundTasks;
         foundTasks = (ArrayList<Task>) tasks.stream()

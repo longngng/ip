@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.DukeException2;
 
 import java.util.Scanner;
 
@@ -52,7 +53,9 @@ public class Parser {
                 } catch (DukeException e) {
                     System.out.println("OOPS!!! The description of a deadline cannot be empty.");
                 } catch (StringIndexOutOfBoundsException e) {
-                    System.out.println("OOPS!!! Cannot find the start of input time. Type help for more info.");
+                    System.out.println("The input time is lacking. Type help for more info.");
+                } catch (DukeException2 e) {
+                    System.out.println("The input time is lacking. Type help for more info.");
                 }
 
                 break;
@@ -62,7 +65,9 @@ public class Parser {
                 } catch (DukeException e) {
                     System.out.println("OOPS!!! The description of an event cannot be empty.");
                 } catch (StringIndexOutOfBoundsException e) {
-                    System.out.println("OOPS!!! Cannot find the start of input time. Type help for more info.");
+                    System.out.println("The input time is lacking. Type help for more info.");
+                } catch (DukeException2 e) {
+                    System.out.println("The input time is lacking. Type help for more info.");
                 }
                 break;
             case COMMAND_DELETE:
@@ -77,7 +82,13 @@ public class Parser {
                 }
                 break;
             case COMMAND_FIND:
-                TaskList.findTasks(line);
+                try {
+                    TaskList.findTasks(line);
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("The keyword cannot be empty.");
+                } catch (DukeException e) {
+                    System.out.println("The keyword cannot be empty.");
+                }
                 break;
             case COMMAND_HELP:
                 printCommandList();
