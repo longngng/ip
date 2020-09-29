@@ -135,7 +135,7 @@ Noted! I've removed this task:
 Now you have 2 tasks in the list.
 ```
 
-### 3.9. Existing the program: `bye`
+### 3.9. Exiting the program: `bye`
 Terminates the program and saves the recorded information to *~/data/duke.txt*
 
 Format: `bye`
