@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event<d4> extends Task{
 
@@ -16,7 +17,11 @@ public class Event<d4> extends Task{
     public Event(String description, String time) {
         super(description);
         this.time = time;
-        this.eventDate = LocalDate.parse(time);
+        try {
+            this.eventDate = LocalDate.parse(time);
+        } catch (DateTimeParseException e) {
+            System.out.println("The input date is not in standard format. Type help for more info!");
+        }
     }
 
     public void setTime(String time) {
@@ -32,9 +37,12 @@ public class Event<d4> extends Task{
      */
     @Override
     public String toString() {
-        return ("[E]" + super.toString() + " (at: "
-                + eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
-        );
+        if (eventDate == null) {
+            return ("[E]" + super.toString() + " (by: " + time + ")");
+        } else {
+            return ("[E]" + super.toString() + " (by: "
+                    + eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
+        }
     }
 }
 

@@ -35,10 +35,23 @@ public class Parser {
                 }
                 break;
             case COMMAND_DEADLINE:
-                TaskList.addDeadline(line);
+                try {
+                    TaskList.addDeadline(line);
+                } catch (DukeException e) {
+                    System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("OOPS!!! Cannot find the start of input time. Type help for more info.");
+                }
+
                 break;
             case COMMAND_EVENT:
-                TaskList.addEvent(line);
+                try {
+                    TaskList.addEvent(line);
+                } catch (DukeException e) {
+                    System.out.println("OOPS!!! The description of an event cannot be empty.");
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("OOPS!!! Cannot find the start of input time. Type help for more info.");
+                }
                 break;
             case COMMAND_DELETE:
                 TaskList.deleteEvent(line);

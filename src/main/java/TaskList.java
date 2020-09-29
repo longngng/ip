@@ -47,9 +47,14 @@ public class TaskList {
     /**
      * Adds a deadline to the list of the tasks and update the output file
      */
-    public static void addDeadline(String line) {
+    public static void addDeadline(String line) throws DukeException {
         int i1 = line.indexOf(' ');
+        if (i1 == -1) {
+            throw new DukeException();
+        }
+
         int i2 = line.indexOf("/by");
+
         String taskDescription = line.substring(i1+1, i2 - 1);
         String taskDeadline = line.substring(i2+4);
         tasks.add(new Deadline(taskDescription, taskDeadline));
@@ -60,8 +65,12 @@ public class TaskList {
     /**
      * Adds an event to the list of the tasks and update the output file
      */
-    public static void addEvent(String line) {
+    public static void addEvent(String line) throws DukeException{
         int i1 = line.indexOf(' ');
+        if (i1 == -1) {
+            throw new DukeException();
+        }
+
         int i2 = line.indexOf("/at");
         String taskDescription = line.substring(i1+1, i2 - 1);
         String taskTime = line.substring(i2+4);
