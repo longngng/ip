@@ -58,8 +58,8 @@ Now, you have 1 task in the list.
 Adds an event with happening time to the list of tasks and updates the records. 
 The new task added is assumed to be not done.
 
-Format: `event <DEADLINE_DESCRIPTION> /at <DEADLINE_DATE>`
-* The <DEADLINE_DATE> must be in the format yyyy-mm-dd
+Format: `event <EVENT_DESCRIPTION> /at <EVENT_DATE>`
+* The <EVENT_DATE> must be in the format yyyy-mm-dd
 >Example
 ```
 >>>event oral presentation 1 /at 2020-09-01
@@ -71,8 +71,8 @@ Now you have 2 tasks in the list.
 Adds a task with deadline to the list of tasks and updates the records. 
 The new task added is assumed to be not done.
 
-Format: `deadline <EVENT_DESCRIPTION> /at <EVENT_DATE>`
-* The <EVENT_DATE> must be in the format yyyy-mm-dd.
+Format: `deadline <DEADLINE_DESCRIPTION> /by <DEADLINE_DATE>`
+* The <DEADLINE_DATE> must be in the format yyyy-mm-dd.
 >Example
 ```
 >>>deadline return book /by 2020-09-12
@@ -141,7 +141,7 @@ Command |Syntax| Command description and example
 help |`help`|prints out the list of available commands and their descriptions
 todo |`todo <DESCRIPTION>` |adds a new todo task
 event |`event <DESCRIPTION> /at <DATE>` |adds a new event task
-deadline |`deadline <DESCRIPTION> /at <DATE>`|adds a new deadline task
+deadline |`deadline <DESCRIPTION> /by <DATE>`|adds a new deadline task
 list |`list`|lists out the existing tasks
 done |`done <INDEX>` |marks a task as done
 find |`find <KEYWORD>`|lists out the tasks that contain a keyword
