@@ -100,7 +100,9 @@ public class Parser {
                 "Below is the list of available commands:\n" +
                 "todo\n" + "   `todo <DESCRIPTION>` adds a new todo task\n" +
                 "event\n" + "   `event <DESCRIPTION> /at <DATE>` adds a new event task\n" +
+                        "   <DATE> must be in format yyyy-mm-dd\n" +
                 "deadline\n" + "    `deadline <DESCRIPTION> /by <DATE>` adds a new deadline task\n" +
+                        "   <DATE> must be in format yyyy-mm-dd\n" +
                 "list\n" + "    `list` lists out the existing tasks\n" +
                 "done\n" + "    `done <INDEX>` marks a task as done\n" +
                 "find\n" + "    `find <KEYWORD>` lists out the tasks that contain a keyword\n" +
