@@ -26,7 +26,7 @@ Prerequisites: JRE 11
 1. Run the program by `java -jar ip.jar`
 1. If the setup is correct, you should see the following greetings:
 ```
-   Hello I'm duke.Duke
+   Hello I'm Duke
    What can I do for you?
 ```
 
