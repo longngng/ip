@@ -30,17 +30,17 @@ Prerequisites: JRE 11
    What can I do for you?
 ```
 
-##3. Feature
+## 3. Feature
 **Notes about the command format**
 
 Words in <UPPER_CASE> are the parameters to be supplied by the user
  
-###3.1. Viewing help: `help`
+### 3.1. Viewing help: `help`
 Lists out the available commands with explanations.
  
 Format: `help`
 
-###3.2. Adding a todo: `todo`
+### 3.2. Adding a todo: `todo`
 Adds a todo task to the list of tasks and updates the records.
 The new task added is assumed to be not done.
 
@@ -54,7 +54,7 @@ Got it! I've added this task:
 Now, you have 1 task in the list.
 ```
 
-###3.3. Adding an event `event`
+### 3.3. Adding an event `event`
 Adds an event with happening time to the list of tasks and updates the records. 
 The new task added is assumed to be not done.
 
@@ -67,7 +67,7 @@ Got it. I've added this task:
   [E][✘] oral presentation 1 (at: Sep 1 2020)
 Now you have 2 tasks in the list.
 ```
-###3.4. Adding a deadline `deadline`
+### 3.4. Adding a deadline `deadline`
 Adds a task with deadline to the list of tasks and updates the records. 
 The new task added is assumed to be not done.
 
@@ -80,7 +80,7 @@ Got it. I've added this task:
   [D][✘] return book (by: Sep 12 2020)
 Now you have 3 tasks in the list.
 ```
-###3.5. Listing all the tasks `list`
+### 3.5. Listing all the tasks `list`
 Lists out all the existing tasks.
 
 Format: `list`
@@ -93,7 +93,7 @@ Format: `list`
 3.[D][✘] return book (by: Sep 12 2020)
 ```
 
-###3.6. Mark a task as done `done`
+### 3.6. Mark a task as done `done`
 Marks a task as done and updates the record.
 
 Format: `done <INDEX>`
@@ -106,7 +106,7 @@ Format: `done <INDEX>`
 Nice! I've marked this task as done:
   [T][✓] read book
 ```
-###3.7. Finding a task `find`
+### 3.7. Finding a task `find`
 Lists out all the tasks that contain a keyword
 
 Format: `find <KEYWORD>`
@@ -118,7 +118,7 @@ Here are the matching tasks in your list:
 2.[D][✘] return book (by: Sep 12 2020)
 ```
 
-###3.8. Deleting a task `delete`
+### 3.8. Deleting a task `delete`
 Deletes a task from the list and updates the record.
 
 Format: `delete <INDEX>`
@@ -131,11 +131,11 @@ Noted! I've removed this task:
   [E][✘] oral presentation 1 (at: Sep 1 2020)
 Now you have 2 tasks in the list.
 ```
-###3.9. Existing the program: `bye`
+### 3.9. Existing the program: `bye`
 Terminates the program and saves the recorded information to *~/data/duke.txt*
 
 Format: `bye`
-##4. Command summary
+## 4. Command summary
 Command |Syntax| Command description and example 
 ------------| ------ | ------------- 
 help |`help`|prints out the list of available commands and their descriptions
