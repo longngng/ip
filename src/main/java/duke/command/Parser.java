@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.DukeException;
+
 import java.util.Scanner;
 
 public class Parser {
@@ -5,7 +9,7 @@ public class Parser {
     /**
      * Read in commands from users and process them until the "bye" command is input
      */
-    protected static void handleCommand() {
+    public static void handleCommand() {
         String line;
         Scanner in = new Scanner(System.in);
 
@@ -112,7 +116,7 @@ public class Parser {
      * @return one type of the command.
      * @throws DukeException If the input command is not in the list of known commands.
      */
-    private static CommandType readCommandType(String input) throws DukeException{
+    private static CommandType readCommandType(String input) throws DukeException {
         int i = input.indexOf(' ');
         String command = (i == -1) ? input : input.substring(0, i);
 

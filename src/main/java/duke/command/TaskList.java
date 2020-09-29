@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -7,7 +16,7 @@ public class TaskList {
     public TaskList() {
     }
 
-    public TaskList(ArrayList<Task> tasks) throws DukeException{
+    public TaskList(ArrayList<Task> tasks) throws DukeException {
         this.tasks = tasks;
     }
 
@@ -32,7 +41,7 @@ public class TaskList {
      *
      * @throws DukeException If there is no description for the list
      */
-    public static void addTodo(String line) throws DukeException{
+    public static void addTodo(String line) throws DukeException {
 
         int i = line.indexOf(' ');
         String taskDescription = (i == -1) ? line : line.substring(i+1);
@@ -65,7 +74,7 @@ public class TaskList {
     /**
      * Adds an event to the list of the tasks and update the output file
      */
-    public static void addEvent(String line) throws DukeException{
+    public static void addEvent(String line) throws DukeException {
         int i1 = line.indexOf(' ');
         if (i1 == -1) {
             throw new DukeException();

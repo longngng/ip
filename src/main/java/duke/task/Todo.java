@@ -1,4 +1,8 @@
-public class Todo extends Task{
+package duke.task;
+
+import duke.task.Task;
+
+public class Todo extends Task {
 
     /**
      * Initializes an instance of To-do with description and time
