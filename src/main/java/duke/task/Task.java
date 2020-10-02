@@ -3,7 +3,8 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected static int numOfTask = 0;
-
+    public final String TICK = "\u2713";
+    public final String CROSS = "\u2718";
     /**
      * Initializes an instance of Task with description
      *
@@ -25,7 +26,7 @@ public class Task {
      * @return the corresponding icon
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? TICK : CROSS); //return tick or X symbols
     }
 
     public String getDescription() {
