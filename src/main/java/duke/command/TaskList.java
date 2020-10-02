@@ -45,9 +45,14 @@ public class TaskList {
      */
     public static void addTodo(String line) throws DukeException {
 
+        String taskDescription;
         int i = line.indexOf(' ');
-        String taskDescription = (i == -1) ? line : line.substring(i+1);
         if (i == -1) {
+            throw new DukeException();
+        } else {
+            taskDescription = line.substring(i+1).trim();
+        }
+        if (taskDescription.length() == 0) {
             throw new DukeException();
         }
         tasks.add(new Todo(taskDescription));
@@ -58,7 +63,7 @@ public class TaskList {
     /**
      * Adds a deadline to the list of the tasks and update the output file
      *
-     * @throws DukeException if there is no description after 'deadline'
+     * @throws DukeException if the description is missing
      * @throws DukeException2 if the date is missing
      */
     public static void addDeadline(String line) throws DukeException, DukeException2 {
@@ -69,7 +74,10 @@ public class TaskList {
 
         int i2 = line.indexOf("/by");
 
-        String taskDescription = line.substring(i1+1, i2 - 1);
+        String taskDescription = line.substring(i1+1, i2 - 1).trim();
+        if(taskDescription.length() == 0) {
+            throw new DukeException();
+        }
         String taskDeadline = line.substring(i2+4).trim();
         if (taskDeadline.length() == 0) {
             throw new DukeException2();
@@ -84,7 +92,7 @@ public class TaskList {
     /**
      * Adds an event to the list of the tasks and update the output file
      *
-     * @throws DukeException if there is no description after 'event'
+     * @throws DukeException if the description is missing
      * @throws DukeException2 if the date is missing
      */
     public static void addEvent(String line) throws DukeException, DukeException2 {
@@ -94,7 +102,10 @@ public class TaskList {
         }
 
         int i2 = line.indexOf("/at");
-        String taskDescription = line.substring(i1+1, i2 - 1);
+        String taskDescription = line.substring(i1+1, i2 - 1).trim();
+        if(taskDescription.length() == 0) {
+            throw new DukeException();
+        }
         String taskTime = line.substring(i2+4).trim();
         if (taskTime.length() == 0) {
             throw new DukeException2();
